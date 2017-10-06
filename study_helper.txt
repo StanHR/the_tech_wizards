@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Computer Graphics Line Generation Algorithm</title>
+<meta name="description" content="Computer Graphics Line Generation Algorithm - Learn about Computer Graphics in simple and easy terms starting from trends in Computer Graphics, Basics, Line Generation Algorithm, Circle Generation Algorithm, Polygon Filling Algorithm, viewing and Clipping, 2D Transformation, 3D Computer Graphics, 3D Transformation, Computer Graphics Curves, Computer Graphics Surfaces, Visible Surface Detection, Fractals, Computer Animation." />
+<meta name="keywords" content="Computer Graphics, Tutorial, beginners, Basics, Line Generation Algorithm, Circle Generation Algorithm, Polygon Filling Algorithm, viewing and Clipping, 2D Transformation, 3D Computer Graphics, 3D Transformation, Computer Graphics Curves, Computer Graphics Surfaces, Visible Surface Detection, Fractals, Computer Animation." />
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+"HTML-CSS": {
+  linebreaks: { automatic: true, width: "container" }          
+}              
+});
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+<base href="https://www.tutorialspoint.com/" />
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+
+<meta property="og:locale" content="en_US" />
+
+<meta property="og:type" content="website" />
+
+<meta property="fb:app_id" content="471319149685276" />
+
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+
+<meta name="robots" content="index, follow"/>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="author" content="tutorialspoint.com">
+
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css">
+
+<!-- Head Libs -->
+
+<!--[if IE 8]>
+
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+
+<![endif]-->
+
+<style>
+
+select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #ffb117 url(/images/pattern.png) repeat center center !important;}
+
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #ffb117 !important;}
+
+.submenu-item{ border-bottom: 2px solid #ffb117 !important; border-top: 2px solid #ffb117 !important }
+
+.ace_scroller{overflow: auto!important;}
+
+</style>
+
+<script>
+
+$(document).ready(function() {
+
+  $('input[name="q"]').keydown(function(event){
+
+    if(event.keyCode == 13) {
+
+      event.preventDefault();
+
+      return false;
+
+    }
+
+  });
+
+});
+
+</script>
+
+</head>
+
+<body onload="prettyPrint()">
+
+<div class="wrapLoader">
+
+   <div class="imgLoader">
+
+      <img  src="/images/loading-cg.gif" alt="" width="70" height="70" />
+
+   </div>
+
+</div>
+
+<header>
+
+   <div class="container">			
+
+      <h1 class="logo">
+
+      <a href="index.htm" title="tutorialspoint">
+
+      <img alt="tutorialspoint" src="/computer_graphics/images/logo.png">
+      </a>
+
+      </h1>			
+
+      <nav>
+
+         <ul class="nav nav-pills nav-top">
+
+            <li><a href="/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+
+            <li> <a href="http://www.sendfiles.net"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+
+            <li> <a href="/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+
+            <li> <a href="/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+
+            <li class="top-icons">
+
+              <ul class="social-icons">
+
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+
+              </ul>
+
+           </li>
+
+         </ul>
+
+      </nav>
+
+         <!-- search code here  --> 
+
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+
+   </div>
+
+  
+
+   <div class="navbar nav-main">
+
+      <div class="container">
+
+         <nav class="nav-main mega-menu">
+
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+
+               <li class="dropdown no-sub-menu">
+
+                  <div class="searchform-popup">
+
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+
+                 </div>
+
+               </li>
+
+            </ul>
+
+         </nav>
+
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+
+         
+
+      </div>
+
+   </div>	
+
+</header>
+
+<div style="clear:both;"></div>
+
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<div class="mini-logo">
+
+<img src="/computer_graphics/images/computer-graphics-mini-logo.jpg" alt="Computer Graphics Tutorial" />
+
+</div>
+
+<ul class="nav nav-list primary left-menu" >
+
+<li class="heading">Computer Graphics Tutorial</li>
+
+<li><a href="/computer_graphics/index.htm">Computer Graphics Home</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_basics.htm">Computer Graphics Basics</a></li>
+
+<li><a href="/computer_graphics/line_generation_algorithm.htm">Line Generation Algorithm</a></li>
+
+<li><a href="/computer_graphics/circle_generation_algorithm.htm">Circle Generation Algorithm</a></li>
+
+<li><a href="/computer_graphics/polygon_filling_algorithm.htm">Polygon Filling Algorithm</a></li>
+
+<li><a href="/computer_graphics/viewing_and_clipping.htm">Viewing &amp; Clipping</a></li>
+
+<li><a href="/computer_graphics/2d_transformation.htm">2D Transformation</a></li>
+
+<li><a href="/computer_graphics/3d_computer_graphics.htm">3D Computer Graphics</a></li>
+
+<li><a href="/computer_graphics/3d_transformation.htm">3D Transformation</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_curves.htm">Computer Graphics Curves</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_surfaces.htm">Computer Graphics Surfaces</a></li>
+
+<li><a href="/computer_graphics/visible_surface_detection.htm">Visible Surface Detection</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_fractals.htm">Computer Graphics Fractals</a></li>
+
+<li><a href="/computer_graphics/computer_animation.htm">Computer Animation</a></li>
+
+</ul>
+
+<ul class="nav nav-list primary left-menu">
+
+<li class="heading">Useful Resources</li>
+
+<li><a href="/computer_graphics/computer_graphics_quick_guide.htm">Computer Graphics - Quick Guide</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_useful_resources.htm">Computer Graphics - Resources</a></li>
+
+<li><a href="/computer_graphics/computer_graphics_discussion.htm">Computer Graphics - Discussion</a></li>
+
+</ul>
+
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Line Generation Algorithm</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="/computer_graphics/computer_graphics_basics.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="/computer_graphics/circle_generation_algorithm.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<p>A line connects two points. It is a basic element in graphics. To draw a line, you need two points between which you can draw a line. In the following three algorithms, we refer the one point of line as $X_{0}, Y_{0}$ and the second point of line as $X_{1}, Y_{1}$.</p>
+<h2>DDA Algorithm</h2>
+<p>Digital Differential Analyzer (DDA) algorithm is the simple line generation algorithm which is explained step by step here.</p>
+<p><b>Step 1</b> &minus; Get the input of two end points $(X_{0}, Y_{0})$ and $(X_{1}, Y_{1})$.</p>
+<p><b>Step 2</b> &minus; Calculate the difference between two end points.</p>
+<pre class="result notranslate">
+dx = X<sub>1</sub> - X<sub>0</sub>
+dy = Y<sub>1</sub> - Y<sub>0</sub>
+</pre>
+<p><b>Step 3</b> &minus; Based on the calculated difference in step-2, you need to identify the number of steps to put pixel. If dx &gt; dy, then you need more steps in x coordinate; otherwise in y coordinate.</p>
+<pre class="prettyprint notranslate">
+if (absolute(dx) &gt; absolute(dy))
+   Steps = absolute(dx);
+else
+   Steps = absolute(dy);
+</pre>
+<p><b>Step 4</b> &minus; Calculate the increment in x coordinate and y coordinate.</p>
+<pre class="result notranslate">
+Xincrement = dx / (float) steps;
+Yincrement = dy / (float) steps;
+</pre>
+<p><b>Step 5</b> &minus; Put the pixel by successfully incrementing x and y coordinates accordingly and complete the drawing of the line.</p>
+<pre class="prettyprint notranslate">
+for(int v=0; v &lt; Steps; v++)
+{
+   x = x + Xincrement;
+   y = y + Yincrement;
+   putpixel(Round(x), Round(y));
+}
+</pre>
+<h2>Bresenham’s Line Generation</h2>
+<p>The Bresenham algorithm is another incremental scan conversion algorithm. The big advantage of this algorithm is that, it uses only integer calculations. Moving across the x axis in unit intervals and at each step choose between two different y coordinates.</p>
+<p>For example, as shown in the following illustration, from position (2, 3) you need to choose between (3, 3) and (3, 4). You would like the point that is closer to the original line.</p>
+<img src="/computer_graphics/images/bresenhams_line_generation.jpg" alt="Bresenham’s Line Generation" />
+<p>At sample position $X_{k}+1,$ the vertical separations from the mathematical line are labelled as $d_{upper}$ and $d_{lower}$.</p>
+<img src="/computer_graphics/images/dupper_and_dlower.jpg" alt="dupper and dlower" />
+<p>From the above illustration, the y coordinate on the mathematical line at $x_{k}+1$ is &minus;</p>
+<p style="padding-left:35%;">Y = m($X_{k}$+1) + b</p>
+<p>So, $d_{upper}$ and $d_{lower}$ are given as follows &minus;</p>
+<p>$$d_{lower} = y-y_{k}$$</p>
+<p style="padding-left:24%;">$$= m(X_{k} + 1) + b - Y_{k}$$</p>
+<p>and</p>
+<p>$$d_{upper} = (y_{k} + 1) - y$$</p>
+<p style="padding-left:44%;">$= Y_{k} + 1 - m (X_{k} + 1) - b$</p>
+<p>You can use these to make a simple decision about which pixel is closer to the mathematical line. This simple decision is based on the difference between the two pixel positions.</p>
+<p>$$d_{lower} - d_{upper} = 2m(x_{k} + 1) - 2y_{k} + 2b - 1$$</p>
+<p>Let us substitute <i>m</i> with <i>dy/dx</i> where <i>dx</i> and <i>dy</i> are the differences between the end-points.</p>
+<p>$$dx (d_{lower} - d_{upper}) =dx(2\frac{\mathrm{d} y}{\mathrm{d} x}(x_{k} + 1) - 2y_{k} + 2b - 1)$$</p>
+<p style="padding-left:29%;">$$ = 2dy.x_{k} - 2dx.y_{k} + 2dy + 2dx(2b-1)$$</p>
+<p style="padding-left:9%;">$$ = 2dy.x_{k} - 2dx.y_{k} + C$$</p>
+<p>So, a decision parameter $P_{k}$ for the <i>k</i>th step along a line is given by &minus;</p>
+<p>$$p_{k} = dx(d_{lower} - d_{upper})$$</p>
+<p style="padding-left:8%;">$$ = 2dy.x_{k} - 2dx.y_{k} + C$$</p>
+<p>The sign of the decision parameter $P_{k}$ is the same as that of $d_{lower} - d_{upper}$.</p>
+<p>If $p_{k}$ is negative, then choose the lower pixel, otherwise choose the upper pixel.</p>
+<p>Remember, the coordinate changes occur along the x axis in unit steps, so you can do everything with integer calculations. At step k+1, the decision parameter is given as &minus;</p>
+<p>$$p_{k +1} = 2dy.x_{k + 1} - 2dx.y_{k + 1} + C$$</p>
+<p>Subtracting $p_{k}$ from this we get &minus;</p>
+<p>$$p_{k + 1} - p_{k} = 2dy(x_{k + 1} - x_{k}) - 2dx(y_{k + 1} - y_{k})$$</p> 
+<p>But, $x_{k+1}$ is the same as $(xk)+1$. So &minus;</p>
+<p>$$p_{k+1} = p_{k} + 2dy - 2dx(y_{k+1} - y_{k})$$</p>
+<p>Where, $Y_{k+1} – Y_{k}$ is either 0 or 1 depending on the sign of $P_{k}$.</p>
+<p>The first decision parameter $p_{0}$ is evaluated at $(x_{0}, y_{0})$ is given as &minus;</p>
+<p>$$p_{0} = 2dy - dx$$</p>
+<p>Now, keeping in mind all the above points and calculations, here is the Bresenham algorithm for slope m &lt; 1 &minus;</p>
+<p><b>Step 1</b> &minus; Input the two end-points of line, storing the left end-point in $(x_{0}, y_{0})$.</p>
+<p><b>Step 2</b> &minus; Plot the point $(x_{0}, y_{0})$.</p>
+<p><b>Step 3</b> &minus; Calculate the constants dx, dy, 2dy, and (2dy – 2dx) and get the first value for the decision parameter as &minus;</p>
+<p>$$p_{0} = 2dy - dx$$</p>
+<p><b>Step 4</b> &minus; At each $X_{k}$ along the line, starting at k = 0, perform the following test &minus;</p>
+<p>If $p_{k}$ &lt; 0, the next point to plot is $(x_{k}+1, y_{k})$ and</p>
+<p>$$p_{k+1} = p_{k} + 2dy$$ Otherwise,</p>
+<p>$$(x_{k}, y_{k}+1)$$</p> 
+<p>$$p_{k+1} = p_{k} +  2dy - 2dx$$</p>
+<p><b>Step 5</b> &minus; Repeat step 4 (dx – 1) times.</p>
+<p>For m &gt; 1, find out whether you need to increment x while incrementing y each time.</p>
+<p>After solving, the equation for decision parameter $P_{k}$ will be very similar, just the x and y in the equation gets interchanged.</p>
+<h2>Mid-Point Algorithm</h2>
+<p>Mid-point algorithm is due to Bresenham which was modified by Pitteway and Van Aken. Assume that you have already put the point P at (x, y) coordinate and the slope of the line is 0 &le; k &le; 1 as shown in the following illustration.</p>
+<p>Now you need to decide whether to put the next point at E or N. This can be chosen by identifying the intersection point Q closest to the point N or E. If the intersection point Q is closest to the point N then N is considered as the next point; otherwise E.</p>
+<img src="/computer_graphics/images/mid_point_algorithm.jpg" alt="Mid-Point Algorithm" />
+<p>To determine that, first calculate the mid-point M(x+1, y + &frac12;). If the intersection point Q of the line with the vertical line connecting E and N is below M, then take E as the next point; otherwise take N as the next point.</p>
+<p>In order to check this, we need to consider the implicit equation &minus;</p>
+<p style="text-align:center;">F(x,y) = mx + b - y</p>
+<p>For positive m at any given X,</p>
+<ul class="list">
+<li>If y is on the line, then F(x, y) = 0</li>
+<li>If y is above the line, then F(x, y) &lt; 0</li>
+<li>If y is below the line, then F(x, y) &gt; 0</li>
+</ul>
+<img src="/computer_graphics/images/implicit_equation.jpg" alt="Implicit Equation" />
+<hr />
+<div class="pre-btn">
+<a href="/computer_graphics/computer_graphics_basics.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="pdf-btn">
+<a href="/computer_graphics/pdf/line_generation_algorithm.pdf" title="Computer Graphics Line Generation Algorithm" target="_blank"><i class="icon icon-file-pdf-o big-font"></i> PDF</a>
+</div>
+<div class="nxt-btn">
+<a href="/computer_graphics/circle_generation_algorithm.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="/about/faq.htm">FAQ's</a></li>
+         <li><a href="/about/about_helping.htm">Helping</a></li>
+         <li><a href="/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="/theme/js/custom-min.js?v=5"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Computer Graphics Line Generation Algorithm",
+    "name": "Computer Graphics Line Generation Algorithm",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/computer_graphics/line_generation_algorithm.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/computer_graphics/images/bresenhams_line_generation.jpg",
+        "width": 426,
+        "height": 374
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "August 15 2017 02:44:31.",
+    "dateModified": "August 15 2017 02:34:09.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "A line connects two points. It is a basic element in graphics. To draw a line, you need two points between which you can draw a line. In the following three algorithms, we refer the one point of line as $X_{0}, Y_{0}$ and the second point of line as $X_{1..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Computer Graphics",
+                "@id": "https://www.tutorialspoint.com/computer_graphics"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Line Generation Algorithm"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+</html>
