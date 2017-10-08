@@ -5,8 +5,8 @@
 <head>
 <!-- Basic -->
 <meta charset="utf-8">
-<title>Operating System - Processes</title>
-<meta name="description" content="Operating System Processes - Learning operating system concepts in simple and easy steps : A beginner's tutorial containing complete knowledge about an operating system starting from its Definition, Functions, Conceptual View, Program Execution, Program Execution, Communication, Error Handling, User Account Management, Multitasking, Real Time System, Process, Program, Memory Management, and Security, Overview, Types, Services, Properties, Processes, Process Scheduling, Scheduling Algorithms, Multithreading, Virtual Memory, I/O Hardware, I/O Software, File System, Linux." />
+<title>Operating System - Process Scheduling</title>
+<meta name="description" content="Operating System Process Scheduling - Learning operating system concepts in simple and easy steps : A beginner's tutorial containing complete knowledge about an operating system starting from its Definition, Functions, Conceptual View, Program Execution, Program Execution, Communication, Error Handling, User Account Management, Multitasking, Real Time System, Process, Program, Memory Management, and Security, Overview, Types, Services, Properties, Processes, Process Scheduling, Scheduling Algorithms, Multithreading, Virtual Memory, I/O Hardware, I/O Software, File System, Linux." />
 <meta name="Keywords" content="Operating System, Tutorials, Learning, Beginners, Basics, Definition, Functions, Conceptual View, Program Execution, Program Execution, Communication, Error Handling, User Account Management, Multitasking, Real Time System, Process, Program, Memory Management, Security, Overview, Types, Services, Properties, Processes, Process Scheduling, Scheduling Algorithms, Multithreading, Virtual Memory, I/O Hardware, I/O Software, File System, Linux." />
 <base href="https://www.tutorialspoint.com/" />
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -158,7 +158,7 @@ $(document).ready(function() {
 <div class="row">
 <div class="content">
 <div class="col-md-7 middle-col">
-<h1>Operating System - Processes</h1>
+<h1>Operating System - Process Scheduling</h1>
 <div class="topgooglead">
 <hr />
 <div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
@@ -176,64 +176,28 @@ src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
 </div>
 <hr />
 <div class="pre-btn">
-<a href="/operating_system/os_properties.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+<a href="/operating_system/os_processes.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
 </div>
 <div class="nxt-btn">
-<a href="/operating_system/os_process_scheduling.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+<a href="/operating_system/os_process_scheduling_algorithms.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
 </div>
 <div class="clearer"></div>
 <hr />
-<h2>Process</h2>
-<p>A process is basically a program in execution. The execution of a process must progress in a sequential fashion.</p>
-<blockquote>A process is defined as an entity which represents the basic unit of work to be implemented in the system.</blockquote>
-<p>To put it in simple terms, we write our computer programs in a text file and when we execute this program, it becomes a process which performs all the tasks mentioned in the program.</p>
-<p>When a program is loaded into the memory and it becomes a process, it can be divided into four sections ─ stack, heap, text and data. The following image shows a simplified layout of a process inside main memory &minus;</p>
-<img src="/operating_system/images/process_components.jpg" alt="Process Components"/>
-<table class="table table-bordered">
-<tr>
-<th style="width:5%;">S.N.</th>
-<th style="text-align:center">Component &amp; Description</th>
-</tr>
-<tr>
-<td>1</td>
-<td><p><b>Stack</b></p>
-<p>The process Stack contains the temporary data such as method/function parameters, return address and local variables.</p>
-</td>
-</tr>
-<tr>
-<td>2</td>
-<td><p><b>Heap</b></p>
-<p>This is dynamically allocated memory to a process during its run time.</p>
-</td>
-</tr>
-<tr>
-<td>3</td>
-<td><p><b>Text</b></p>
-<p>This includes the current activity represented by the value of Program Counter and the contents of the processor's registers.</p>
-</td>
-</tr>
-<tr>
-<td>4</td>
-<td><p><b>Data</b></p>
-<p>This section contains the global and static variables.</p>
-</td>
-</tr>
-</table>
-<h2>Program</h2>
-<p>A program is a piece of code which may be a single line or millions of lines. A computer program is usually written by a computer programmer in a programming language. For example, here is a simple program written in C programming language &minus;</p>
-<pre class="prettyprint notranslate">
-#include &lt;stdio.h&gt;
-
-int main() {
-   printf("Hello, World! \n");
-   return 0;
-}
-</pre>
-<p>A computer program is a collection of instructions that performs a specific task when executed by a computer. When we compare a program with a process, we can conclude that a process is a dynamic instance of a computer program.</p>
-<p>A part of a computer program that performs a well-defined task is known as an <b>algorithm</b>. A collection of computer programs, libraries and related data are referred to as a <b>software</b>.</p>
-<h2>Process Life Cycle</h2>
-<p> When a process executes, it passes through different states. These stages may differ in different operating systems, and the names of these states are also not standardized.</p>
-<p>In general, a process can have one of the following five states at a time.</p>
+<h2>Definition</h2>
+<p>The process scheduling is the activity of the process manager that handles the removal of the running process from the CPU and the selection of another process on the basis of a particular strategy.</p>
+<p>Process scheduling is an essential part of a Multiprogramming operating systems. Such operating systems allow more than one process to be loaded into the executable memory at a time and the loaded process shares the CPU using time multiplexing.</p>
+<h2>Process Scheduling Queues</h2>
+<p>The OS maintains all PCBs in Process Scheduling Queues. The OS maintains a separate queue for each of the process states and PCBs of all processes in the same execution state are placed in the same queue. When the state of a process is changed, its PCB is unlinked from its current queue and moved to its new state queue.</p>
+<p>The Operating System maintains the following important process scheduling queues &minus;</p>
+<ul class="list">
+<li><p><b>Job queue</b> &minus; This queue keeps all the processes in the system.</p></li>
+<li><p><b>Ready queue</b> &minus; This queue keeps a set of all processes residing in main memory, ready and waiting to execute. A new process is always put in this queue.</p></li>
+<li><p><b>Device queues</b> &minus; The processes which are blocked due to unavailability of an I/O device constitute this queue.</p></li>
+</ul>
+<img src="/operating_system/images/queuing_diagram.jpg" alt="Process Scheduling Queuing" />
+<p>The OS can use different policies to manage each queue (FIFO, Round Robin, Priority, etc.). The OS scheduler determines how to move processes between the ready and run queues which can only have one entry per processor core on the system; in the above diagram, it has been merged with the CPU.</p>
+<h2>Two-State Process Model</h2>
+<p>Two-state process model refers to running and non-running states which are described below &minus;</p>
 <table class="table table-bordered">
 <tr>
 <th style="width:5%;">S.N.</th>
@@ -241,106 +205,96 @@ int main() {
 </tr>
 <tr>
 <td>1</td>
-<td>
-<p><b>Start</b></p>
-<p>This is the initial state when a process is first started/created.</p>
+<td><p><b>Running</b></p>
+<p>When a new process is created, it enters into the system as in the running state.</p>
 </td>
 </tr>
 <tr>
 <td>2</td>
-<td>
-<p><b>Ready</b></p>
-<p>The process is waiting to be assigned to a processor. Ready processes are waiting to have the processor allocated to them by the operating system so that they can run. Process may come into this state after <b>Start</b> state or while running it by but interrupted by the scheduler to assign CPU to some other process.</p>
+<td><p><b>Not Running</b></p>
+<p>Processes that are not running are kept in queue, waiting for their turn to execute. Each entry in the queue is a pointer to a particular process. Queue is implemented by using linked list. Use of dispatcher is as follows. When a process is interrupted, that process is transferred in the waiting queue. If the process has completed or aborted, the process is discarded. In either case, the dispatcher then selects a process from the queue to execute.</p>
 </td>
 </tr>
-<tr>
-<td>3</td>
-<td><p><b>Running</b></p>
-<p>Once the process has been assigned to a processor by the OS scheduler, the process state is set to running and the processor executes its instructions.</p></td>
-</tr>
-<tr>
-<td>4</td>
-<td><p><b>Waiting</b></p> 
-<p>Process moves into the waiting state if it needs to wait for a resource, such as waiting for user input, or waiting for a file to become available.</p></td>
-</tr>
-<tr>
-<td>5</td>
-<td><p><b>Terminated or Exit</b></p>
-<p>Once the process finishes its execution, or it is terminated by the operating system, it is moved to the terminated state where it waits to be removed from main memory.</p></td>
-</tr>
 </table>
-<img src="/operating_system/images/process_state.jpg" alt="Process States"/>
-<h2>Process Control Block (PCB)</h2>
-<p>A Process Control Block is a data structure maintained by the Operating System for every process. The PCB is identified by an integer process ID (PID). A PCB keeps all the information needed to keep track of a process as listed below in the table &minus;</p>
+<h2>Schedulers</h2>
+<p>Schedulers are special system software which handle process scheduling in various ways. Their main task is to select the jobs to be submitted into the system and to decide which process to run. Schedulers are of three types &minus;</p>
+<ul class="list">
+<li>Long-Term Scheduler</li>
+<li>Short-Term Scheduler</li>
+<li>Medium-Term Scheduler</li>
+</ul>
+<h2>Long Term Scheduler</h2>
+<p>It is also called a <b>job scheduler</b>. A long-term scheduler determines which programs are admitted to the system for processing. It selects processes from the queue and loads them into memory for execution. Process loads into the memory for CPU scheduling.</p>
+<p>The primary objective of the job scheduler is to provide a balanced mix of jobs, such as I/O bound and processor bound. It also controls the degree of multiprogramming. If the degree of multiprogramming is stable, then the average rate of process creation must be equal to the average departure rate of processes leaving the system.</p>
+<p>On some systems, the long-term scheduler may not be available or minimal. Time-sharing operating systems have no long term scheduler. When a process changes the state from new to ready, then there is use of long-term scheduler.</p>
+<h2>Short Term Scheduler</h2>
+<p>It is also called as <b>CPU scheduler</b>. Its main objective is to increase system performance in accordance with the chosen set of criteria. It is the change of ready state to running state of the process. CPU scheduler selects a process among the processes that are ready to execute and allocates CPU to one of them.</p>
+<p>Short-term schedulers, also known as dispatchers, make the decision of which process to execute next. Short-term schedulers are faster than long-term schedulers.</p>
+<h2>Medium Term Scheduler</h2>
+<p>Medium-term scheduling is a part of <b>swapping</b>. It removes the processes from the memory. It reduces the degree of multiprogramming. The medium-term scheduler is in-charge of handling the swapped out-processes.</p>
+<p>A running process may become suspended if it makes an I/O request. A suspended processes cannot make any progress towards completion. In this condition, to remove the process from memory and make space for other processes, the suspended process is moved to the secondary storage. This process is called <b>swapping</b>, and the process is said to be swapped out or rolled out. Swapping may be necessary to improve the process mix.</p>
+<h2>Comparison among Scheduler</h2>
 <table class="table table-bordered">
 <tr>
 <th style="width:5%;">S.N.</th>
-<th style="text-align:center">Information &amp; Description</th>
+<th style="text-align:center">Long-Term Scheduler</th>
+<th style="text-align:center">Short-Term Scheduler</th>
+<th style="text-align:center">Medium-Term Scheduler</th>
 </tr>
 <tr>
 <td>1</td>
-<td><p><b>Process State</b></p>
-<p>The current state of the process i.e., whether it is ready, running, waiting, or whatever.</p>
-</td>
+<td>It is a job scheduler</td>
+<td>It is a CPU scheduler</td>
+<td>It is a process swapping scheduler.</td>
 </tr>
 <tr>
 <td>2</td>
-<td><p><b>Process privileges</b></p>
-<p>This is required to allow/disallow access to system resources.</p></td>
+<td>Speed is lesser than short term scheduler</td>
+<td>Speed is fastest among other two</td>
+<td>Speed is in between both short and long term scheduler.</td>
 </tr>
 <tr>
 <td>3</td>
-<td><p><b>Process ID</b></p>
-<p>Unique identification for each of the process in the operating system.</p></td>
+<td>It controls the degree of multiprogramming</td>
+<td>It provides lesser control over degree of multiprogramming</td>
+<td>It reduces the degree of multiprogramming.</td>
 </tr>
 <tr>
 <td>4</td>
-<td><p><b>Pointer</b></p>
-<p>A pointer to parent process.</p></td>
+<td>It is almost absent or minimal in time sharing system</td>
+<td>It is also minimal in time sharing system</td>
+<td>It is a part of Time sharing systems.</td>
 </tr>
 <tr>
 <td>5</td>
-<td><p><b>Program Counter</b></p>
-<p>Program Counter is a pointer to the address of the next instruction to be executed for this process.</p></td>
-</tr>
-<tr>
-<td>6</td>
-<td><p><b>CPU registers</b></p>
-<p>Various CPU registers where process need to be stored for execution for running state.</p></td>
-</tr>
-<tr>
-<td>7</td>
-<td><p><b>CPU Scheduling Information</b></p> 
-<p>Process priority and other scheduling information  which is required to schedule the process.</p></td>
-</tr>
-<tr>
-<td>8</td>
-<td><p><b>Memory management information</b></p> 
-<p>This includes the information of page table, memory limits, Segment table depending on memory used by the operating system.</p></td>
-</tr>
-<tr>
-<td>9</td>
-<td><p><b>Accounting information</b></p>
-<p>This  includes the amount of CPU used for process execution, time limits, execution ID etc.</p></td>
-</tr>
-<tr>
-<td>10</td>
-<td><p><b>IO status information</b></p>
-<p>This includes a list of I/O devices allocated to the process.</p></td>
+<td>It selects processes from pool and loads them into memory for execution</td>
+<td>It selects those processes which are ready to execute</td>
+<td>It can re-introduce the process into memory and execution can be continued.</td>
 </tr>
 </table>
-<p>The architecture of a PCB is completely dependent on Operating System and may contain different information in different operating systems. Here is a simplified diagram of a PCB &minus;</p>
-<img src="/operating_system/images/pcb.jpg" alt="Process Control Block" />
-<p>The PCB is maintained for a process throughout its lifetime, and is deleted once the process terminates.</p>
+<h2>Context Switch</h2>
+<p>A context switch is the mechanism to store and restore the state or context of a CPU in Process Control block so that a process execution can be resumed from the same point at a later time. Using this technique, a context switcher enables multiple processes to share a single CPU. Context switching is an essential part of a multitasking operating system features.</p>
+<p>When the scheduler switches the CPU from executing one process to execute another, the state from the current running process is stored into the process control block. After this, the state for the process to run next is loaded from its own PCB and used to set the PC, registers, etc. At that point, the second process can start executing.</p>
+<img src="/operating_system/images/context_switch.jpg" alt="Process Context Switch" />
+<p>Context switches are computationally intensive since register and memory state must be saved and restored. To avoid the amount of context switching time, some hardware systems employ two or more sets of processor registers. When the process is switched, the following information is stored for later use.</p>
+<ul class="list">
+<li>Program Counter</li>
+<li>Scheduling information</li>
+<li>Base and limit register value</li>
+<li>Currently used register</li>
+<li>Changed State</li>
+<li>I/O State information</li>
+<li>Accounting information</li>
+</ul>
 <hr />
 <div class="pre-btn">
-<a href="/operating_system/os_properties.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+<a href="/operating_system/os_processes.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
 </div>
 <div class="print-btn center">
 <a href="/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
 </div>
 <div class="nxt-btn">
-<a href="/operating_system/os_process_scheduling.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+<a href="/operating_system/os_process_scheduling_algorithms.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
 </div>
 <hr />
 <!-- PRINTING ENDS HERE -->
@@ -371,22 +325,22 @@ src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
 <div class="row">
 <div class="col-md-3" id="rightbar">
 <div class="simple-ad">
-<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/operating_system/os_processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/facebookIcon.jpg" alt="img" />
 </a>
-<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/operating_system/os_processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/twitterIcon.jpg" alt="img" />
 </a>
-<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/operating_system/os_processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/linkedinIcon.jpg" alt="img" />
 </a>
-<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/operating_system/os_processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/googlePlusIcon.jpg" alt="img" />
 </a>
-<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/operating_system/os_processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/StumbleUponIcon.jpg" alt="img" />
 </a>
-<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/operating_system/os_processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/operating_system/os_process_scheduling.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
 <img src="/images/reddit.jpg" alt="img" />
 </a>
 </div>
@@ -481,17 +435,17 @@ $('.pg-icon').click(function(){
 {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Operating System - Processes",
-    "name": "Operating System - Processes",
+    "headline": "Operating System - Process Scheduling",
+    "name": "Operating System - Process Scheduling",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://www.tutorialspoint.com/operating_system/os_processes.htm"
+        "@id": "https://www.tutorialspoint.com/operating_system/os_process_scheduling.htm"
     },
     "image": {
         "@type": "ImageObject",
-        "url": "https://www.tutorialspoint.com/operating_system/images/process_components.jpg",
-        "width": 286,
-        "height": 379
+        "url": "https://www.tutorialspoint.com/operating_system/images/queuing_diagram.jpg",
+        "width": 491,
+        "height": 276
     },
     "author": {
         "@type": "Organization",
@@ -517,7 +471,7 @@ $('.pg-icon').click(function(){
             "height": 60
         }
     },
-    "description": "A process is basically a program in execution. The execution of a process must progress in a sequential fashion...."
+    "description": "The process scheduling is the activity of the process manager that handles the removal of the running process from the CPU and the selection of another process on the basis of a particular strategy...."
 }
 </script>
 <script type="application/ld+json">
@@ -545,7 +499,7 @@ $('.pg-icon').click(function(){
             "@type": "ListItem",
             "position": 3,
             "item": {
-                "name": "OS - Processes"
+                "name": "OS - Process Scheduling"
             }
         }
     ]

@@ -8,3 +8,4 @@ print("Number of Rows: ",countrow)
 for i in range(0,countrow):
     data = a.fetchone()
     print(data)
+

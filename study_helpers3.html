@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<title>Unix / Linux Processes Management</title>
+<meta name="description" content="Unix / Linux Processes Management - Learning fundamentals of UNIX in simple and easy steps : A beginner's tutorial containing complete knowledge of Getting Started, Unix Korn and Bourne Shell and Programming, File Permission / Access Modes, Environment, Utilities, Pipes and Filters, Network Communication Utilities, File System, Directories, Memory Management, Special Variables, vi editor, What is Shell?, Using Shell Variables, Arrays, Basic Operators, Decision Making, Loop Types, Control, Substitution, Quoting Mechanisms, Input / Output Redirections, Functions, Man Page Help, Regular Expressions with SED, User Administration, System Performance, Logging, Signals and Traps, Processes." />
+<meta name="keywords" content="Unix, Linux, Tutorials, Learning, Operating, System, OS, Beginners, Basics, Korn, Bourne, Shell,Programming, Getting Started, File Permission / Access Modes, Environment, Utilities, Pipes and Filters, Network Communication Utilities, File System, Directories, Memory Management, Special Variables, vi editor, What is Shell?, Using Shell Variables, Arrays, Basic Operators, Decision Making, Loop Types, Control, Substitution, Quoting Mechanisms, Input / Output Redirections, Functions, Man Page Help, Regular Expressions with SED, User Administration, System Performance, Logging, Signals and Traps, Processes." />
+<base href="https://www.tutorialspoint.com/" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="fb:app_id" content="471319149685276" />
+<meta property="og:site_name" content="www.tutorialspoint.com" />
+<meta name="robots" content="index, follow"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="author" content="tutorialspoint.com">
+<script type="text/javascript" src="https://www.tutorialspoint.com/theme/js/script-min-v4.js"></script>
+<link rel="stylesheet" href="https://www.tutorialspoint.com/theme/css/style-min.css">
+<!-- Head Libs -->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="/theme/css/ie8.css">
+<![endif]-->
+<style>
+pre.prettyprint.tryit {min-height:37px; background: #eee url(/unix/images/try-it.jpg) top right no-repeat !important}select{ border:0 !important; outline: 1px inset black !important; outline-offset: -1px !important; }
+ul.nav-list.primary>li a.videolink{    background: none; margin: 0px; padding: 0px; border: 1px solid #d6d6d6;}
+div.feature-box div.feature-box-icon, .col-md-3 .course-box, li.heading, div.footer-copyright { background: #01adb9 url(/images/pattern.png) repeat center center !important;}
+.sub-main-menu .sub-menuu div:hover, .sub-main-menu .viewall, header nav ul.nav-main li a:hover, button.btn-responsive-nav, header div.search button.btn-default { background: #01adb9 !important;}
+.submenu-item{ border-bottom: 2px solid #01adb9 !important; border-top: 2px solid #01adb9 !important }
+.ace_scroller{overflow: auto!important;}
+</style>
+<script>
+$(document).ready(function() {
+  $('input[name="q"]').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+</script>
+</head>
+<body onload="prettyPrint()">
+<div class="wrapLoader">
+   <div class="imgLoader">
+      <img  src="/images/loading-cg.gif" alt="" width="70" height="70" />
+   </div>
+</div>
+<header>
+   <div class="container">			
+      <h1 class="logo">
+      <a href="index.htm" title="tutorialspoint">
+      <img alt="tutorialspoint" src="/unix/images/logo.png">
+      </a>
+      </h1>			
+      <nav>
+         <ul class="nav nav-pills nav-top">
+            <li><a href="/about/about_careers.htm" style="background: #fffb09; font-weight: bold;"><i class="icon icon-suitcase"></i> Jobs</a></li>
+            <li> <a href="http://www.sendfiles.net"><i class="fa fa-send"></i> &nbsp;SENDFiles</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/whiteboard.htm"><img src="theme/css/icons/image-editor.png" alt="Whiteboard" title="Whiteboard"> &nbsp;Whiteboard</a> </li>
+            <li> <a href="https://www.tutorialspoint.com/netmeeting.php"><i class="fa-camera"></i> &nbsp;Net Meeting</a> </li>
+            <li> <a href="/online_dev_tools.htm"> <i class="dev-tools-menu" style="opacity:.5"></i> Tools </a> </li>
+            <li> <a href="/articles/index.php"><i class="icon icon-file-text-o"></i> &nbsp;Articles</a> </li>            
+            <li class="top-icons">
+              <ul class="social-icons">
+              <li class="facebook"><a href="https://www.facebook.com/tutorialspointindia" target="_blank" data-placement="bottom" title="tutorialspoint @ Facebook">Facebook</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/u/0/116678774017490391259/posts" target="_blank" data-placement="bottom" title="tutorialspoint @ Google+">Google+</a></li>
+              <li class="twitter"><a href="https://www.twitter.com/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Twitter">Twitter</a></li>
+              <li class="linkedin"><a href="https://www.linkedin.com/company/tutorialspoint" target="_blank" data-placement="bottom" title="tutorialspoint @ Linkedin">Linkedin</a></li>
+              <li class="youtube"><a href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" target="_blank" data-placement="bottom" title="tutorialspoint YouTube">YouTube</a></li>
+              </ul>
+           </li>
+         </ul>
+      </nav>
+         <!-- search code here  --> 
+      <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style="top: 24px!important"> <i class="icon icon-bars"></i> </button>
+   </div>
+  
+   <div class="navbar nav-main">
+      <div class="container">
+         <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+               <li class="dropdown no-sub-menu"> <a class="dropdown" href="index.htm"><i class="icon icon-home"></i> Home</a> </li>   
+               <li class="dropdown" id="liTL"><a class="dropdown" href="javascript:void(0);"><span class="tut-lib"> Tutorials Library <i class="fa-caret-down"></i></span></a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="codingground.htm"><i class="fa-code"></i> Coding Ground </a> </li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="tutor_connect/index.php"><i class="fa-user"> </i> Tutor Connect</a></li>
+               <li class="dropdown no-sub-menu"><a class="dropdown" href="videotutorials/index.htm"><i class="fa-toggle-right"></i> Videos </a></li>
+               <li class="dropdown no-sub-menu">
+                  <div class="searchform-popup">
+                     <input class="header-search-box" type="text" id="search-string" name="q" placeholder="Search your favorite tutorials..." onfocus="if (this.value == 'Search your favorite tutorials...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search your favorite tutorials...';}" autocomplete="off">
+                     <div class="magnifying-glass"><i class="icon-search"></i> Search </div>
+                 </div>
+               </li>
+            </ul>
+         </nav>
+         <div class="submenu-item sub-main-menu" id="top-sub-menu"></div>
+         
+      </div>
+   </div>	
+</header>
+<div style="clear:both;"></div>
+<div role="main" class="main">
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+<aside class="sidebar">
+<style>
+.ts{
+   vertical-align:middle !important;
+   text-align:center !important;   
+}
+</style>
+<div class="mini-logo">
+<img src="/unix/images/unix-mini-logo.jpg" alt="UNIX Tutorial" />
+</div>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Unix / Linux for Beginners</li>
+<li><a href="/unix/index.htm">Unix / Linux - Home</a></li>
+<li><a href="/unix/unix-getting-started.htm">Unix / Linux - Getting Started</a></li>
+<li><a href="/unix/unix-file-management.htm">Unix / Linux - File Management</a></li>
+<li><a href="/unix/unix-directories.htm">Unix / Linux - Directories</a></li>
+<li><a href="/unix/unix-file-permission.htm">Unix / Linux - File Permission</a></li>
+<li><a href="/unix/unix-environment.htm">Unix / Linux - Environment</a></li>
+<li><a href="/unix/unix-basic-utilities.htm">Unix / Linux - Basic Utilities</a></li>
+<li><a href="/unix/unix-pipes-filters.htm">Unix / Linux - Pipes &amp; Filters</a></li>
+<li><a href="/unix/unix-processes.htm">Unix / Linux - Processes</a></li>
+<li><a href="/unix/unix-communication.htm">Unix / Linux - Communication</a></li>
+<li><a href="/unix/unix-vi-editor.htm">Unix / Linux - The vi Editor</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Unix / Linux Shell Programming</li>
+<li><a href="/unix/unix-what-is-shell.htm">Unix / Linux - What is Shell?</a></li>
+<li><a href="/unix/unix-using-variables.htm">Unix / Linux - Using Variables</a></li>
+<li><a href="/unix/unix-special-variables.htm">Unix / Linux - Special Variables</a></li>
+<li><a href="/unix/unix-using-arrays.htm">Unix / Linux - Using Arrays</a></li>
+<li><a href="/unix/unix-basic-operators.htm">Unix / Linux - Basic Operators</a></li>
+<li><a href="/unix/unix-decision-making.htm">Unix / Linux - Decision Making</a></li>
+<li><a href="/unix/unix-shell-loops.htm">Unix / Linux - Shell Loops</a></li>
+<li><a href="/unix/unix-loop-control.htm">Unix / Linux - Loop Control</a></li>
+<li><a href="/unix/unix-shell-substitutions.htm">Unix / Linux - Shell Substitutions</a></li>
+<li><a href="/unix/unix-quoting-mechanisms.htm">Unix / Linux - Quoting Mechanisms</a></li>
+<li><a href="/unix/unix-io-redirections.htm">Unix / Linux - IO Redirections</a></li>
+<li><a href="/unix/unix-shell-functions.htm">Unix / Linux - Shell Functions</a></li>
+<li><a href="/unix/unix-manpage-help.htm">Unix / Linux - Manpage Help</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Advanced Unix / Linux</li>
+<li><a href="/unix/unix-regular-expressions.htm">Unix / Linux - Regular Expressions</a></li>
+<li><a href="/unix/unix-file-system.htm">Unix / Linux - File System Basics</a></li>
+<li><a href="/unix/unix-user-administration.htm">Unix / Linux - User Administration</a></li>
+<li><a href="/unix/unix-system-performance.htm">Unix / Linux - System Performance</a></li>
+<li><a href="/unix/unix-system-logging.htm">Unix / Linux - System Logging</a></li>
+<li><a href="/unix/unix-signals-traps.htm">Unix / Linux - Signals and Traps</a></li>
+</ul>
+<ul class="nav nav-list primary left-menu">
+<li class="heading">Unix / Linux Useful Resources</li>
+<li><a href="/unix/unix_questions_answers.htm">Unix / Linux - Questions &amp; Answers</a></li>
+<li><a href="/unix/unix-useful-commands.htm">Unix / Linux - Useful Commands</a></li>
+<li><a href="/unix/unix-quick-guide.htm">Unix / Linux - Quick Guide</a></li>
+<li><a href="/unix/unix-builtin-functions.htm">Unix / Linux - Builtin Functions</a></li>
+<li><a href="/unix_system_calls/index.htm">Unix / Linux - System Calls</a></li>
+<li><a href="/unix_commands/index.htm">Unix / Linux - Commands List</a></li>
+<li><a href="/unix/unix-useful-resources.htm">Unix / Linux - Useful Resources</a></li>
+<li><a href="/unix/unix-discussion.htm">Unix / Linux - Discussion</a></li>
+</ul>
+<ul class="nav nav-list primary push-bottom left-menu special">
+<li class="sreading">Selected Reading</li>
+<li><a target="_top" href="/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+<li><a target="_top" href="/questions_and_answers.htm">Questions and Answers</a></li>
+<li><a target="_top" href="/effective_resume_writing.htm">Effective Resume Writing</a></li>
+<li><a target="_top" href="/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+<li><a target="_top" href="/computer_glossary.htm">Computer Glossary</a></li>
+<li><a target="_top" href="/computer_whoiswho.htm">Who is Who</a></li>
+</ul>
+</aside>
+</div>
+<!-- PRINTING STARTS HERE -->
+<div class="row">
+<div class="content">
+<div class="col-md-7 middle-col">
+<h1>Unix / Linux - Processes Management</h1>
+<div class="topgooglead">
+<hr />
+<div style="padding-bottom:5px;padding-left:10px;">Advertisements</div>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "image";
+google_ad_channel = "";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js"> 
+</script>
+</div>
+<hr />
+<div class="pre-btn">
+<a href="/unix/unix-pipes-filters.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="nxt-btn">
+<a href="/unix/unix-communication.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<div class="clearer"></div>
+<hr />
+<p>In this chapter, we will discuss in detail about process management in Unix. When you execute a program on your Unix system, the system creates a special environment for that program. This environment contains everything needed for the system to run the program as if no other program were running on the system.</p>
+<p>Whenever you issue a command in Unix, it creates, or starts, a new process. When you tried out the <b>ls</b> command to list the directory contents, you started a process. A process, in simple terms, is an instance of a running program.</p>
+<p>The operating system tracks processes through a five-digit ID number known as the <b>pid</b> or the <b>process ID</b>. Each process in the system has a unique <b>pid</b>.</p>
+<p>Pids eventually repeat because all the possible numbers are used up and the next pid rolls or starts over. At any point of time, no two processes with the same pid exist in the system because it is the pid that Unix uses to track each process.</p>
+<h2>Starting a Process</h2>
+<p>When you start a process (run a command), there are two ways you can run it &minus;</p>
+<ul class="list">
+<li>Foreground Processes</li>
+<li>Background Processes</li>
+</ul>
+<h3>Foreground Processes</h3>
+<p>By default, every process that you start runs in the foreground. It gets its input from the keyboard and sends its output to the screen.</p>
+<p>You can see this happen with the <b>ls</b> command. If you wish to list all the files in your current directory, you can use the following command &minus;</p>
+<pre class="result notranslate">
+$ls ch*.doc
+</pre>
+<p>This would display all the files, the names of which start with <b>ch</b> and end with <b>.doc</b> &minus;</p>
+<pre class="result notranslate">
+ch01-1.doc   ch010.doc  ch02.doc    ch03-2.doc 
+ch04-1.doc   ch040.doc  ch05.doc    ch06-2.doc
+ch01-2.doc   ch02-1.doc
+</pre>
+<p>The process runs in the foreground, the output is directed to my screen, and if the <b>ls</b> command wants any input (which it does not), it waits for it from the keyboard.</p>
+<p>While a program is running in the foreground and is time-consuming, no other commands can be run (start any other processes) because the prompt would not be available until the program finishes processing and comes out.</p>
+<h3>Background Processes</h3>
+<p>A background process runs without being connected to your keyboard. If the background process requires any keyboard input, it waits.</p>
+<p>The advantage of running a process in the background is that you can run other commands; you do not have to wait until it completes to start another!</p>
+<p>The simplest way to start a background process is to add an ampersand (<b>&amp;</b>) at the end of the command.</p>
+<pre class="result notranslate">
+$ls ch*.doc &amp;
+</pre>
+<p>This displays all those files the names of which start with <b>ch</b> and end with <b>.doc</b> &minus;</p>
+<pre class="result notranslate">
+ch01-1.doc   ch010.doc  ch02.doc    ch03-2.doc 
+ch04-1.doc   ch040.doc  ch05.doc    ch06-2.doc
+ch01-2.doc   ch02-1.doc
+</pre>
+<p>Here, if the <b>ls</b> command wants any input (which it does not), it goes into a stop state until we move it into the foreground and give it the data from the keyboard.</p>
+<p>That first line contains information about the background process - the job number and the process ID. You need to know the job number to manipulate it between the background and the foreground.</p>
+<p>Press the Enter key and you will see the following &minus;</p>
+<pre class="result notranslate">
+[1]   +   Done                 ls ch*.doc &amp;
+$
+</pre>
+<p>The first line tells you that the <b>ls</b> command background process finishes successfully. The second is a prompt for another command.</p>
+<h2>Listing Running Processes</h2>
+<p>It is easy to see your own processes by running the <b>ps</b> (process status) command as follows &minus;</p>
+<pre class="result notranslate">
+$ps
+PID       TTY      TIME        CMD
+18358     ttyp3    00:00:00    sh
+18361     ttyp3    00:01:31    abiword
+18789     ttyp3    00:00:00    ps
+</pre>
+<p>One of the most commonly used flags for ps is the <b>-f</b> ( f for full) option, which provides more information as shown in the following example &minus;</p>
+<pre class="result notranslate">
+$ps -f
+UID      PID  PPID C STIME    TTY   TIME CMD
+amrood   6738 3662 0 10:23:03 pts/6 0:00 first_one
+amrood   6739 3662 0 10:22:54 pts/6 0:00 second_one
+amrood   3662 3657 0 08:10:53 pts/6 0:00 -ksh
+amrood   6892 3662 4 10:51:50 pts/6 0:00 ps -f
+</pre>
+<p>Here is the description of all the fields displayed by <b>ps -f</b> command &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">S.No.</th>
+<th style="text-align:center;">Column &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td>
+<p><b>UID</b></p>
+<p>User ID that this process belongs to (the person running it)</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td>
+<p><b>PID</b></p>
+<p>Process ID</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td>
+<p><b>PPID</b></p>
+<p>Parent process ID (the ID of the process that started it)</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td>
+<p><b>C</b></p>
+<p>CPU utilization of process</p>
+</td>
+</tr>
+<tr>
+<td class="ts">5</td>
+<td>
+<p><b>STIME</b></p>
+<p>Process start time</p>
+</td>
+</tr>
+<tr>
+<td class="ts">6</td>
+<td>
+<p><b>TTY</b></p>
+<p>Terminal type associated with the process</p>
+</td>
+</tr>
+<tr>
+<td class="ts">7</td>
+<td>
+<p><b>TIME</b></p>
+<p>CPU time taken by the process</p>
+</td>
+</tr>
+<tr>
+<td class="ts">8</td>
+<td>
+<p><b>CMD</b></p>
+<p>The command that started this process</p>
+</td>
+</tr>
+</table>
+<p>There are other options which can be used along with <b>ps</b> command &minus;</p>
+<table class="table table-bordered">
+<tr>
+<th style="text-align:center;">S.No.</th>
+<th style="text-align:center;">Option &amp; Description</th>
+</tr>
+<tr>
+<td class="ts">1</td>
+<td>
+<p><b>-a</b></p>
+<p>Shows information about all users</p>
+</td>
+</tr>
+<tr>
+<td class="ts">2</td>
+<td>
+<p><b>-x</b></p>
+<p>Shows information about processes without terminals</p>
+</td>
+</tr>
+<tr>
+<td class="ts">3</td>
+<td>
+<p><b>-u</b></p>
+<p>Shows additional information like -f option</p>
+</td>
+</tr>
+<tr>
+<td class="ts">4</td>
+<td>
+<p><b>-e</b></p>
+<p>Displays extended information</p>
+</td>
+</tr>
+</table>
+<h2>Stopping Processes</h2>
+<p>Ending a process can be done in several different ways. Often, from a console-based command, sending a CTRL &plus; C keystroke (the default interrupt character) will exit the command. This works when the process is running in the foreground mode.</p>
+<p>If a process is running in the background, you should get its Job ID using the <b>ps</b> command. After that, you can use the <b>kill</b> command to kill the process as follows &minus;</p>
+<pre class="result notranslate">
+$ps -f
+UID      PID  PPID C STIME    TTY   TIME CMD
+amrood   6738 3662 0 10:23:03 pts/6 0:00 first_one
+amrood   6739 3662 0 10:22:54 pts/6 0:00 second_one
+amrood   3662 3657 0 08:10:53 pts/6 0:00 -ksh
+amrood   6892 3662 4 10:51:50 pts/6 0:00 ps -f
+$kill 6738
+Terminated
+</pre>
+<p>Here, the <b>kill</b> command terminates the <b>first_one</b> process. If a process ignores a regular kill command, you can use <b>kill -9</b> followed by the process ID as follows &minus;</p>
+<pre class="result notranslate">
+$kill -9 6738
+Terminated
+</pre>
+<h2>Parent and Child Processes</h2>
+<p>Each unix process has two ID numbers assigned to it: The Process ID (pid) and the Parent process ID (ppid). Each user process in the system has a parent process.</p>
+<p>Most of the commands that you run have the shell as their parent. Check the <b>ps -f</b> example where this command listed both the process ID and the parent process ID.</p>
+<h2>Zombie and Orphan Processes</h2>
+<p>Normally, when a child process is killed, the parent process is updated via a <b>SIGCHLD</b> signal. Then the parent can do some other task or restart a new child as needed. However, sometimes the parent process is killed before its child is killed. In this case, the "parent of all processes," the <b>init</b> process, becomes the new PPID (parent process ID). In some cases, these processes are called orphan processes.</p>
+<p>When a process is killed, a <b>ps</b> listing may still show the process with a <b>Z</b> state. This is a zombie or defunct process. The process is dead and not being used. These processes are different from the orphan processes. They have completed execution but still find an entry in the process table.</p>
+<h2>Daemon Processes</h2>
+<p>Daemons are system-related background processes that often run with the permissions of root and services requests from other processes.</p>
+<p>A daemon has no controlling terminal. It cannot open <b>/dev/tty</b>. If you do a <b>"ps -ef"</b> and look at the <b>tty</b> field, all daemons will have a <b>?</b> for the <b>tty</b>.</p>
+<p>To be precise, a daemon is a process that runs in the background, usually waiting for something to happen that it is capable of working with. For example, a printer daemon waiting for print commands.</p>
+<p>If you have a program that calls for lengthy processing, then it’s worth to make it a daemon and run it in the background.</p>
+<h2>The top Command</h2>
+<p>The <b>top</b> command is a very useful tool for quickly showing processes sorted by various criteria.</p>
+<p>It is an interactive diagnostic tool that updates frequently and shows information about physical and virtual memory, CPU usage, load averages, and your busy processes.</p>
+<p>Here is the simple syntax to run top command and to see the statistics of CPU utilization by different processes &minus;</p>
+<pre class="result notranslate">
+$top
+</pre>
+<h2>Job ID Versus Process ID</h2>
+<p>Background and suspended processes are usually manipulated via <b>job number (job ID)</b>. This number is different from the process ID and is used because it is shorter.</p>
+<p>In addition, a job can consist of multiple processes running in a series or at the same time, in parallel. Using the job ID is easier than tracking individual processes.</p>
+<hr />
+<div class="pre-btn">
+<a href="/unix/unix-pipes-filters.htm"><i class="icon icon-arrow-circle-o-left big-font"></i> Previous Page</a>
+</div>
+<div class="print-btn center">
+<a href="/cgi-bin/printpage.cgi" target="_blank"><i class="icon icon-print big-font"></i> Print</a>
+</div>
+<div class="nxt-btn">
+<a href="/unix/unix-communication.htm">Next Page <i class="icon icon-arrow-circle-o-right big-font"></i>&nbsp;</a>
+</div>
+<hr />
+<!-- PRINTING ENDS HERE -->
+<div class="bottomgooglead">
+<div class="bottomadtag">Advertisements</div>
+<script type="text/javascript"><!--
+var width = 580;
+var height = 400;
+var format = "580x400_as";
+if( window.innerWidth < 468 ){
+   width = 300;
+   height = 250;
+   format = "300x250_as";
+}
+google_ad_client = "pub-7133395778201029";
+google_ad_width = width;
+google_ad_height = height;
+google_ad_format = format;
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-3" id="rightbar">
+<div class="simple-ad">
+<a href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.facebook.com/sharer.php?u=' + 'http://www.tutorialspoint.com/unix/unix-processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/facebookIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://twitter.com/share?url=' + 'http://www.tutorialspoint.com/unix/unix-processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/twitterIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.linkedin.com/cws/share?url=' + 'http://www.tutorialspoint.com/unix/unix-processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/linkedinIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://plus.google.com/share?url=http://www.tutorialspoint.com/unix/unix-processes.htm','sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/googlePlusIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://www.stumbleupon.com/submit?url=http://www.tutorialspoint.com/unix/unix-processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=456,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/StumbleUponIcon.jpg" alt="img" />
+</a>
+<a  href="javascript:void(0)" onclick="var sTop = window.screen.height/2-(218); var sLeft = window.screen.width/2-(313);window.open('https://reddit.com/submit?url=http://www.tutorialspoint.com/unix/unix-processes.htm&amp;title='+ document.title,'sharer','toolbar=0,status=0,width=626,height=656,top='+sTop+',left='+sLeft);return false;">
+<img src="/images/reddit.jpg" alt="img" />
+</a>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7133395778201029";
+google_ad_width = 300;
+google_ad_height = 600;
+google_ad_format = "300x600_as";
+google_ad_type = "image";
+google_ad_channel ="";
+//--></script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<div class="rightgooglead">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2537027957187252";
+/* Right Side Ad */
+google_ad_slot = "right_side_ad";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer-copyright">
+<div class="container">
+<div class="row">
+<div class="col-md-1">
+<a href="index.htm" class="logo"> <img alt="Tutorials Point" class="img-responsive" src="/scripts/img/logo-footer.png"> </a>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <nav id="sub-menu">
+      <ul>
+         <li><a href="/about/tutorials_writing.htm">Write for us</a></li>
+         <li><a href="/about/faq.htm">FAQ's</a></li>
+         <li><a href="/about/about_helping.htm">Helping</a></li>
+         <li><a href="/about/contact_us.htm">Contact</a></li>
+      </ul>
+   </nav>
+</div>
+<div class="col-md-3 col-sm-12 col-xs-12">
+<p>&copy; Copyright 2017. All Rights Reserved.</p>
+</div>
+<div class="col-md-4 col-sm-12 col-xs-12">
+   <div class="news-group">
+      <input type="text" class="form-control-foot search" name="textemail" id="textemail" autocomplete="off" placeholder="Enter email for newsletter" onfocus="if (this.value == 'Enter email for newsletter...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter email for newsletter...';}">
+      <span class="input-group-btn"> <button class="btn btn-default btn-footer" id="btnemail" type="submit" onclick="javascript:void(0);">go</button> </span>
+      <div id="newsresponse"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Libs -->
+<script type="text/javascript" src="/theme/js/custom-min.js?v=5"></script>
+<script src="https://www.google-analytics.com/urchin.js">
+</script>
+<script type="text/javascript">
+_uacct = "UA-232293-6";
+urchinTracker();
+$('.pg-icon').click(function(){
+   $('.wrapLoader').show();
+});
+</script>
+<script type="text/javascript" src="/theme/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript">
+   var tryit = new $.TryIt('/unix/try_unix.php');
+   tryit.compile();
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Unix / Linux Processes Management",
+    "name": "Unix / Linux Processes Management",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.tutorialspoint.com/unix/unix-processes.htm"
+    },
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://www.tutorialspoint.com/unix/images/unix-mini-logo.jpg",
+        "width": 255,
+        "height": 194
+    },
+    "author": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "datePublished": "August 16 2017 09:37:23.",
+    "dateModified": "August 16 2017 00:17:37.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tutorials Point",
+        "url": "https://www.tutorialspoint.com",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.tutorialspoint.com/images/logo60.png",
+            "width": 210,
+            "height": 60
+        }
+    },
+    "description": "In this chapter, we will discuss in detail about process management in Unix. When you execute a program on your Unix system, the system creates a special environment for that program. This environment contains everything needed for the system to run the p..."
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "name": "www.tutorialspoint.com",
+                "@id": "https://www.tutorialspoint.com"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "name": "Unix",
+                "@id": "https://www.tutorialspoint.com/unix"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "name": "Unix / Linux - Processes"
+            }
+        }
+    ]
+}
+</script>
+</div>
+</body>
+</html>
